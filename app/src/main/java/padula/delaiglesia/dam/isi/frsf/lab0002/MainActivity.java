@@ -1,7 +1,8 @@
 package padula.delaiglesia.dam.isi.frsf.lab0002;
 
-import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,9 +20,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import padula.delaiglesia.dam.isi.frsf.lab0002.modelo.Pedido;
+import padula.delaiglesia.dam.isi.frsf.lab0002.modelo.Tarjeta;
 import padula.delaiglesia.dam.isi.frsf.lab0002.modelo.Utils;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final Integer CODIGO_LLAMADA_PAGO_PEDIDO=800;
+    private final Integer CODIGO_LLAMADA_ACT3=900;
 
     ArrayAdapter<Utils.ElementoMenu> miAdaptador;
 
@@ -117,12 +122,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonConfirmarPedido.setOnClickListener(new View.OnClickListener() {
+       buttonConfirmarPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pedidoConfirmado = true;
                 Intent intent = new Intent(MainActivity.this, PagoPedido.class);
-                startActivityForResult(intent,57);
+                startActivityForResult(intent,CODIGO_LLAMADA_PAGO_PEDIDO);
             }
         });
 
@@ -227,5 +232,25 @@ public class MainActivity extends AppCompatActivity {
         miAdaptador.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==CODIGO_LLAMADA_PAGO_PEDIDO){
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(),"Pago confirmado. Monto total: " + pedido.calcularCostoTotal().toString(), Toast.LENGTH_LONG).show();
 
-}
+                Tarjeta t = (Tarjeta)data.getExtras().get("TARJETA");
+                String cliente = (String)data.getExtras().get("CLIENTE");
+
+                String currentText = txtPedido.getText().toString();
+
+                txtPedido.setText(currentText + "\n" + cliente + "\n" + t.toString());
+
+
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Resultado: Cancelado ", Toast.LENGTH_LONG).show();
+            }
+            }
+        }
+    }
+

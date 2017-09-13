@@ -123,4 +123,33 @@ public class Pedido implements java.io.Serializable {
         horaEntrega = "";
         esDelivery = false;
     }
+
+    public Double calcularCostoTotal(){
+        double precioPlato;
+        double precioPostre;
+        double precioBebida;
+
+        if(plato == null){
+            precioPlato = 0;
+        }
+        else {
+            precioPlato = plato.getPrecio();
+        }
+
+        if(postre == null){
+            precioPostre = 0;
+        }
+        else {
+            precioPostre = postre.getPrecio();
+        }
+
+        if(bebida == null){
+            precioBebida = 0;
+        }
+        else {
+            precioBebida = bebida.getPrecio();
+        }
+
+        return precioBebida + precioPlato + precioPostre;
+    }
 }

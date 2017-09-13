@@ -9,7 +9,7 @@ public class Tarjeta implements java.io.Serializable{
     private  String nombre;
     private Integer numero;
     private  Integer seguridad;
-    private Date fechaVencimiento;
+    private String fechaVencimiento;
 
     @Override
     public String toString() {
@@ -33,7 +33,7 @@ public class Tarjeta implements java.io.Serializable{
         this.seguridad = seguridad;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
@@ -49,11 +49,11 @@ public class Tarjeta implements java.io.Serializable{
         return seguridad;
     }
 
-    public Date getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public Tarjeta(Integer numero, String nombre, Integer seguridad, Date fechaVencimiento) {
+    public Tarjeta(Integer numero, String nombre, Integer seguridad, String fechaVencimiento) {
         this.numero = numero;
         this.nombre = nombre;
         this.seguridad = seguridad;
