@@ -16,20 +16,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Utils {
+public class Utils implements Serializable {
     DecimalFormat f = new DecimalFormat("##.00");
 
     private ElementoMenu[] listaBebidas;
     private ElementoMenu[] listaPlatos;
     private ElementoMenu[] listaPostre;
 
-    public class ElementoMenu {
+    public class ElementoMenu implements Serializable{
         private Integer id;
         private String nombre;
         private Double precio;

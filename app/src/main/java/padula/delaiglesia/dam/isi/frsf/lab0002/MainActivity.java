@@ -210,9 +210,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
     private  void reiniciarPedido(){
+        pedidoConfirmado = false;
         clearListViewSelection();
         pedido.clear();
         txtPedido.setText("");
@@ -230,6 +233,26 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Utils.ElementoMenu> lst = new ArrayList<Utils.ElementoMenu>(Arrays.asList(newDataSet));
         miAdaptador.addAll(newDataSet);
         miAdaptador.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("PEDIDO",pedido);
+        outState.putBoolean("STATUS_PEDIDO",pedidoConfirmado);
+        outState.putInt("RADIOBTN_SELECTED",idRadioButtonSeleccionado);
+        outState.putString("PEDIDO_TEXT",txtPedido.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle previousState){
+            super.onRestoreInstanceState(previousState);
+
+            idRadioButtonSeleccionado = previousState.getInt("RADIOBTN_SELECTED");
+            pedidoConfirmado = previousState.getBoolean("STATUS_PEDIDO");
+            pedido = (Pedido) previousState.getSerializable("PEDIDO");
+            txtPedido.setText(previousState.getString("PEDIDO_TEXT"));
+
     }
 
     @Override
