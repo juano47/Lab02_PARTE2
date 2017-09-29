@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab0002</string>
+    <string name="app_name">Lab02</string>
     <string name="txtPedido" />
     <string name="buttonReiniciarText">REINICIAR</string>
     <string name="buttonConfirmarPedidoText">CONFIRMAR PEDIDO</string>

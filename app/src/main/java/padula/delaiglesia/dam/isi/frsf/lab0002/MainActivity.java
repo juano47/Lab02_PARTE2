@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -259,7 +260,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode==CODIGO_LLAMADA_PAGO_PEDIDO){
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(),"Pago confirmado. Monto total: " + pedido.calcularCostoTotal().toString(), Toast.LENGTH_LONG).show();
+                DecimalFormat f = new DecimalFormat("##.00");
+                Toast.makeText(getApplicationContext(),"Pago confirmado. Monto total: " + f.format(this.pedido.calcularCostoTotal()), Toast.LENGTH_LONG).show();
 
                 Tarjeta t = (Tarjeta)data.getExtras().get("TARJETA");
                 String cliente = (String)data.getExtras().get("CLIENTE");
@@ -272,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(getApplicationContext(),"Resultado: Cancelado ", Toast.LENGTH_LONG).show();
+                pedidoConfirmado=false;
             }
             }
         }

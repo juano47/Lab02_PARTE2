@@ -42,7 +42,13 @@ public class PagoPedido extends AppCompatActivity {
                     String nombreCliente = nombre.getText().toString();
                     String emailCliente = email.getText().toString();
                     String nombreTarjetaCredito = nombreTarjeta.getText().toString();
-                    Integer numero = Integer.parseInt(numeroTarjeta.getText().toString());
+                    Integer numero=-1;
+
+                    if(!numeroTarjeta.getText().toString().trim().equalsIgnoreCase("")){
+                        numero = Integer.parseInt(numeroTarjeta.getText().toString());
+                    }
+
+
                     String fechaVencimiento = diaVencimiento.getText().toString() + "/" + mesVencimiento.getText().toString();
 
                     Tarjeta t = new Tarjeta(numero,nombreTarjetaCredito,123,fechaVencimiento);
